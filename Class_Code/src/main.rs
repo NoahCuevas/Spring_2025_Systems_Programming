@@ -302,10 +302,98 @@ impl Solution {
 
 
 // Week 8 Day 2
+/*
 fn main() {
     println!("Everything is good");
     // panic!("Crash the program, stop running, clean the memory");
     // println!("This won't be printed.");
     let v = vec![1, 2, 3];
     println!("{:?}", v[99]); // This will cause a panic because the index is out of bounds
+}
+*/
+
+
+// Week 10 Day 1 -----> Week 9 Day 1 was midterm and i didnt do Day 2
+// Went over 6-1 Generics
+/*
+fn generics_method_definitions() {
+    struct File<T> {
+        name: String,
+        data: T,
+    }
+
+    impl<T> File<T> {
+        fn new(name: &str, content: T) -> File<T> {
+            File { name: String::from(name), data: content }
+        }
+    }
+
+    let textfile = File::new("lets'go", vec!["K'Maro".to_string()]);
+    let imagefile = File::new("MonaLisa", vec![0, 123, 255]);
+
+    println!("Textfile name {:?}. Textfile content {:?}", textfile.name, textfile.data);
+    println!("Imagefile name {:?}. Imagefile content {:?}", imagefile.name, imagefile.data);
+}
+
+fn main(){
+    generics_method_definitions();
+}
+*/
+
+// Week 11 Day 1
+
+// Define our data structure
+struct Data {
+    value: i32,
+}
+
+// Higher-order function: defines what needs to be done
+fn process_data(data: &mut [Data], operation: fn(&mut Data)) {
+    for item in data.iter_mut() {
+        operation(item);
+    }
+}
+
+// Specific operations: actual functions which do the work
+fn double_value(data: &mut Data) {
+    data.value *= 2;
+}
+
+fn square_value(data: &mut Data) {
+    data.value = data.value * data.value;
+}
+
+// Helper function to print values without closures
+fn print_values(items: &[Data]) {
+    print!("Values: ");
+    for (i, item) in items.iter().enumerate() {
+        if i > 0 {
+            print!(", ");
+        }
+        print!("{}", item.value);
+    }
+    println!();
+}
+
+fn main() {
+    let mut items = vec![
+        Data { value: 1 },
+        Data { value: 2 },
+        Data { value: 3 },
+        Data { value: 4 },
+        Data { value: 5 },
+    ];
+    
+    // The specific operation is decided here
+    print!("Original ");
+    print_values(&items);
+    
+    process_data(&mut items, double_value);
+    print!("After doubling: ");
+    print_values(&items);
+    
+    // We can easily switch to a different operation
+    process_data(&mut items, square_value);
+    print!("After squaring: ");
+    print_values(&items);
 }

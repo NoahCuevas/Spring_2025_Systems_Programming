@@ -1,0 +1,1 @@
+/workspaces/Spring2025Systems/Homeworks/Homework_02/crypto_data_fetcher/target/debug/crypto_data_fetcher: /workspaces/Spring2025Systems/Homeworks/Homework_02/crypto_data_fetcher/src/main.rs
